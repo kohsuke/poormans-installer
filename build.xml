@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+ The contents of this file are subject to the terms
+ of the Common Development and Distribution License
+ (the "License").  You may not use this file except
+ in compliance with the License.
+
+ You can obtain a copy of the license at
+ https://jwsdp.dev.java.net/CDDLv1.0.html
+ See the License for the specific language governing
+ permissions and limitations under the License.
+
+ When distributing Covered Code, include this CDDL
+ HEADER in each file and include the License file at
+ https://jwsdp.dev.java.net/CDDLv1.0.html  If applicable,
+ add the following below this CDDL HEADER, with the
+ fields enclosed by brackets "[]" replaced with your
+ own identifying information: Portions Copyright [yyyy]
+ [name of copyright owner]
+
+ Copyright 2005, Sun Microsystems, Inc.
+-->
+<project name="poormans-installer" basedir="." default="release">
+
+  <fileset id="modules" dir=".">
+    <include name="installer/build.xml"/>
+    <include name="installer-builder/build.xml"/>
+  </fileset>
+
+  <target name="clean">
+    <subant target="clean">
+      <fileset refid="modules"/>
+    </subant>
+  </target>
+
+  <target name="jar">
+    <!-- how come subant can't control the order!? -->
+    <ant antfile="installer/build.xml" target="jar" />
+    <ant antfile="installer-builder/build.xml" target="jar" />
+  </target>
+
+  <target name="release" depends="jar"
+          description="create a package for the installer builder for other projects.">
+    <tstamp/>
+
+    <mkdir dir="build" />
+    <zip destfile="build/installer-builder-${DSTAMP}.zip">
+      <fileset dir="." includes="readme.txt"/>
+      <fileset dir="installer/build"
+               includes="installer.jar, installer.src.zip"/>
+      <fileset dir="installer-builder/build"
+               includes="installer-builder.jar, installer-builder.src.zip"/>
+      <fileset dir="lib" includes="sfx4j-*.jar"/>
+    </zip>
+  </target>
+</project>
