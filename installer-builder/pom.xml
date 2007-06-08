@@ -9,6 +9,7 @@
 
   <artifactId>installer-builder</artifactId>
   <name>Installer Builder</name>
+  <packaging>maven-plugin</packaging>
 
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -84,6 +85,16 @@
       <groupId>ant</groupId>
       <artifactId>ant</artifactId>
       <version>1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-project</artifactId>
+        <version>2.0</version>
     </dependency>
   </dependencies>
 </project>
