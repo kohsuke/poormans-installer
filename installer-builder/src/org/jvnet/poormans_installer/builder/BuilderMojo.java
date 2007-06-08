@@ -5,6 +5,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.tools.ant.BuildException;
 
 import java.io.File;
@@ -42,6 +43,11 @@ public class BuilderMojo extends AbstractMojo {
      */
     private File licenseFile;
 
+    /**
+     * @component
+     */
+    protected ArtifactFactory artifactFactory;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         Artifact a = project.getArtifact();
         if(a==null || a.getFile()==null)
@@ -54,6 +60,13 @@ public class BuilderMojo extends AbstractMojo {
         } catch (Exception e) {
             throw new BuildException(e);
         }
+
+        // attach the artifact
+        Artifact installer = artifactFactory.createArtifactWithClassifier(
+            project.getGroupId(),project.getArtifactId(),project.getVersion(),
+            "jar","installer");
+        installer.setFile(outputFileName);
+        project.getAttachedArtifacts().add(installer);
 
     }
 }
