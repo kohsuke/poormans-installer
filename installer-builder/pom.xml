@@ -48,7 +48,7 @@
                 <artifactItem>
                   <groupId>org.kohsuke.sfx4j</groupId>
                   <artifactId>sfx4j</artifactId>
-                  <version>1.1</version>
+                  <version>1.2</version>
                   <outputDirectory>target/classes</outputDirectory>
                 </artifactItem>
               </artifactItems>
@@ -79,7 +79,7 @@
     <dependency>
       <groupId>org.kohsuke.sfx4j</groupId>
       <artifactId>sfx4j</artifactId>
-      <version>1.1</version>
+      <version>1.2</version>
     </dependency>
     <dependency>
       <groupId>ant</groupId>
