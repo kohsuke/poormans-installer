@@ -19,6 +19,8 @@
  */
 package org.jvnet.poormans_installer;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,8 +30,6 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import javax.swing.*;
 
 /**
  * @author Kohsuke Kawaguchi (kohsuke.kawaguchi@sun.com)
