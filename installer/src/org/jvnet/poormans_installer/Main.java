@@ -83,13 +83,13 @@ public class Main {
         // Get the native look and feel class name
         String nativeLF = UIManager.getSystemLookAndFeelClassName();
 
-        // Install the look and feel
+        // Install the look and feel.
+        // some reports on the web shows that this causes 6389282 and 6585553
+        // so catch any errors and ignore it. This is not a fatal issue
+        // for the installer.
         try {
             UIManager.setLookAndFeel(nativeLF);
-        } catch (InstantiationException e) {
-        } catch (ClassNotFoundException e) {
-        } catch (UnsupportedLookAndFeelException e) {
-        } catch (IllegalAccessException e) {
+        } catch (Throwable e) {
         }
     }
 
