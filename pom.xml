@@ -32,9 +32,9 @@
 
   <distributionManagement>
     <repository>
+      <id>java.net</id>
       <uniqueVersion>false</uniqueVersion>
-      <id>local-repository</id>
-      <url>file:${path-to-m2-repo.java.net}</url>
+      <url>java-net:/maven2-repository/trunk/www/repository/</url>
     </repository>
   </distributionManagement>
 
@@ -56,7 +56,23 @@
         </configuration>
       </plugin>
     </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.jvnet.wagon-svn</groupId>
+        <artifactId>wagon-svn</artifactId>
+        <version>1.6</version>
+      </extension>
+    </extensions>
   </build>
+
+  <licenses>
+    <license>
+      <name>CDDL</name>
+      <url>http://www.netbeans.org/cddl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
   
   <modules>
     <module>installer</module>
