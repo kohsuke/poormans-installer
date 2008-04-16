@@ -1,6 +1,7 @@
 #!/bin/bash -ex
 #
 # Script that Kohsuke uses to push the new version to the web
-ant clean release
+mvn -B release:prepare || mvn install
+mvn -B release:prepare release:perform
 dt=$(date +%Y%m%d)
-jnupload poormans-installer / "$dt release" Stable build/installer-builder-$dt.zip
+javanettasks uploadFile poormans-installer / "$dt release" Stable build/installer-builder-$dt.zip
