@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jvnet.poormans-installer</groupId>
   <artifactId>pom</artifactId>
-  <version>1.4</version>
+  <version>1.5-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>Poorman's installer</name>
@@ -12,7 +12,6 @@
     <connection>scm:cvs:pserver:guest@cvs.dev.java.net:/cvs:poormans-installer/poormans-installer</connection>
     <developerConnection>scm:cvs:pserver:kohsuke@cvs.dev.java.net:/cvs:poormans-installer/poormans-installer</developerConnection>
     <url>https://poormans-installer.dev.java.net/source/browse/poormans-installer/poormans-installer</url>
-    <tag>pom-1_4</tag>
   </scm>
   
   <repositories>
