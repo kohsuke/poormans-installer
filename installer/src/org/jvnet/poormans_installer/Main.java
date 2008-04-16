@@ -20,7 +20,6 @@
 package org.jvnet.poormans_installer;
 
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,6 +56,34 @@ public class Main {
                 // really we want to catch HeadlessException, but that seems
                 // to cause NoClassDefError on JDK 1.3
                 accepted = doConsole(in);
+            } catch( LinkageError e ) {
+                /* and on some systems, I got a report that you get the following error.
+
+                Exception in thread "main" java.lang.NoClassDefFoundError: Could not initialize class sun.awt.X11GraphicsEnvironment
+                    at java.lang.Class.forName0(Native Method)
+                    at java.lang.Class.forName(Class.java:169)
+                    at java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment(GraphicsEnvironment.java:68)
+                    at sun.awt.X11.XToolkit.<clinit>(XToolkit.java:89)
+                    at java.lang.Class.forName0(Native Method)
+                    at java.lang.Class.forName(Class.java:169)
+                    at java.awt.Toolkit$2.run(Toolkit.java:836)
+                    at java.security.AccessController.doPrivileged(Native Method)
+                    at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:828)
+                    at sun.swing.SwingUtilities2$AATextInfo.getAATextInfo(SwingUtilities2.java:120)
+                    at javax.swing.plaf.metal.MetalLookAndFeel.initComponentDefaults(MetalLookAndFeel.java:1556)
+                    at javax.swing.plaf.basic.BasicLookAndFeel.getDefaults(BasicLookAndFeel.java:130)
+                    at javax.swing.plaf.metal.MetalLookAndFeel.getDefaults(MetalLookAndFeel.java:1591)
+                    at javax.swing.UIManager.setLookAndFeel(UIManager.java:537)
+                    at javax.swing.UIManager.setLookAndFeel(UIManager.java:577)
+                    at org.jvnet.poormans_installer.Main.setUILookAndFeel(Main.java:95)
+                    at org.jvnet.poormans_installer.Main.main(Main.java:50)
+
+                 */
+                if(e.getMessage().contains("GraphicsEnvironment")) {
+                    accepted = doConsole(in);
+                } else {
+                    throw e;
+                }
             }
         }
         
